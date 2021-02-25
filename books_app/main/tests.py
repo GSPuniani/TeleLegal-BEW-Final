@@ -285,12 +285,17 @@ class MainTests(unittest.TestCase):
         create_user()
         login(self.app, 'me1', 'password')
 
+        user = User.query.filter_by(username='me1').one()
+        book = Book.query.get(1)
+        user.favorite_books.append(book)
+
         # TODO: Make a POST request to the /unfavorite/1 route
+        self.app.post('/unfavorite/1')
 
         # TODO: Verify that the book with id 1 was removed from the user's 
         # favorites
-        pass
+        self.assertNotIn(book, user.favorite_books)
 
 
 
-# Ask about create authors in To-Dos, follow_redirects parameter, and profile test with name 1
+# Ask about create authors in To-Dos, follow_redirects parameter, profile test with name 1, and unfavorite book test

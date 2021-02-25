@@ -56,11 +56,16 @@ class AuthTests(TestCase):
         # TODO: Write a test for the signup route. It should:
         # - Make a POST request to /signup, sending a username & password
         # - Check that the user now exists in the database
-        pass
+        post_data = {
+            'username': '',
+            'password': ''
+        }
+        self.app.post('/signup', data=post_data)
 
     def test_signup_existing_user(self):
         # TODO: Write a test for the signup route. It should:
         # - Create a user
+        create_user()
         # - Make a POST request to /signup, sending the same username & password
         # - Check that the form is displayed again with an error message
         pass
@@ -68,6 +73,7 @@ class AuthTests(TestCase):
     def test_login_correct_password(self):
         # TODO: Write a test for the login route. It should:
         # - Create a user
+        create_user()
         # - Make a POST request to /login, sending the created username & password
         # - Check that the "login" button is not displayed on the homepage
         pass
@@ -82,6 +88,7 @@ class AuthTests(TestCase):
     def test_login_incorrect_password(self):
         # TODO: Write a test for the login route. It should:
         # - Create a user
+        create_user()
         # - Make a POST request to /login, sending the created username &
         #   an incorrect password
         # - Check that the login form is displayed again, with an appropriate
@@ -91,6 +98,7 @@ class AuthTests(TestCase):
     def test_logout(self):
         # TODO: Write a test for the logout route. It should:
         # - Create a user
+        create_user()
         # - Log the user in (make a POST request to /login)
         # - Make a GET request to /logout
         # - Check that the "login" button appears on the homepage
