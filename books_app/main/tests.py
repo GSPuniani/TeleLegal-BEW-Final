@@ -4,7 +4,7 @@ import unittest
 from datetime import date
  
 from books_app import app, db, bcrypt
-from books_app.models import Book, Author, User, Audience
+from books_app.models import Book, Author, Genre, User, Audience
 
 """
 Run these tests with the command:
@@ -210,22 +210,44 @@ class MainTests(unittest.TestCase):
         # Make GET request
         response = self.app.get('/create_book')
 
-        # Make sure that the user was redirecte to the login page
+        # Make sure that the user was redirected to the login page
         self.assertEqual(response.status_code, 302)
         self.assertIn('/login?next=%2Fcreate_book', response.location)
 
     def test_create_author(self):
         """Test creating an author."""
-        # TODO: Make a POST request to the /create_author route
+        # Set up
+        create_books()
+        create_user()
+        login(self.app, 'me1', 'password')
 
-        # TODO: Verify that the author was updated in the database
-        pass
+        # Make a POST request to the /create_author route
+        post_data = {
+            'name': 'Arthur C. Clarke',
+            'biography': 'Arthur C. Clarke was an English science-fiction writer.'
+        }
+        self.app.post('/create_author', data=post_data)
+
+        # Verify that the author was updated in the database
+        created_author = Author.query.filter_by(name='Arthur C. Clarke').one()
+        self.assertIsNotNone(created_author)
+        self.assertEqual(created_author.biography, 'Arthur C. Clarke was an English science-fiction writer.')
 
     def test_create_genre(self):
-        # TODO: Make a POST request to the /create_genre route, 
+        # Set up
+        create_books()
+        create_user()
+        login(self.app, 'me1', 'password')
 
-        # TODO: Verify that the genre was updated in the database
-        pass
+        # Make a POST request to the /create_genre route
+        post_data = {
+            'name': 'Science-fiction',
+        }
+        self.app.post('/create_genre', data=post_data)
+
+        # Verify that the genre was updated in the database
+        created_genre = Genre.query.filter_by(name='Science-fiction').one()
+        self.assertIsNotNone(created_genre)
 
     def test_profile_page(self):
         # TODO: Make a GET request to the /profile/1 route
