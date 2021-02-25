@@ -106,7 +106,8 @@ def book_detail(book_id):
 
 @main.route('/profile/<username>')
 def profile(username):
-    user = User.query.filter_by(username=username).one()
+    # user = User.query.filter_by(username=username).one()
+    user = User.query.filter_by(username=username).first()
     return render_template('profile.html', user=user)
 
 
