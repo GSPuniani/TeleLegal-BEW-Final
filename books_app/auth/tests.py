@@ -151,10 +151,20 @@ class AuthTests(TestCase):
         self.assertIn("Password doesn&#39;t match. Please try again.", login_page_text)
 
     def test_logout(self):
-        # TODO: Write a test for the logout route. It should:
-        # - Create a user
+        """Tests that a user logs out by checking the return 
+        homepage for the login button."""
+        # Create a user
         create_user()
-        # - Log the user in (make a POST request to /login)
-        # - Make a GET request to /logout
-        # - Check that the "login" button appears on the homepage
-        pass
+        # Log the user in (make a POST request to /login)
+        post_data = {
+            'username': 'me1',
+            'password': 'password'
+        }
+        self.app.post('/login', data=post_data, follow_redirects=True)
+
+        # Make a GET request to /logout
+        logged_out = self.app.get('/logout', follow_redirects=True)
+        homepage_text = logged_out.get_data(as_text=True)
+
+        # Check that the "login" button appears on the homepage
+        self.assertIn('Log In', homepage_text)
