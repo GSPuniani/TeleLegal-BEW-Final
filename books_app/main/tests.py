@@ -280,19 +280,25 @@ class MainTests(unittest.TestCase):
         
 
     def test_unfavorite_book(self):
-        # TODO: Login as the user me1, and add book with id 1 to me1's favorites
+        # Login as the user me1, and add book with id 1 to me1's favorites
         create_books()
         create_user()
         login(self.app, 'me1', 'password')
 
-        user = User.query.filter_by(username='me1').one()
-        book = Book.query.get(1)
-        user.favorite_books.append(book)
+        # user = User.query.filter_by(username='me1').one()
+        # book = Book.query.get(1)
+        # user.favorite_books.append(book)
 
-        # TODO: Make a POST request to the /unfavorite/1 route
+        # Make a POST request to the /favorite/1 route
+        self.app.post('/favorite/1')
+
+        # Make a POST request to the /unfavorite/1 route
         self.app.post('/unfavorite/1')
 
-        # TODO: Verify that the book with id 1 was removed from the user's 
+        book = Book.query.get(1)
+        user = User.query.filter_by(username='me1').one()
+
+        # Verify that the book with id 1 was removed from the user's 
         # favorites
         self.assertNotIn(book, user.favorite_books)
 
