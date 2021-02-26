@@ -8,7 +8,7 @@ from books_app.models import Book, Author, User, Audience
 
 """
 Run these tests with the command:
-python -m unittest books_app.main.tests
+python -m unittest books_app.auth.tests
 """
 
 #################################################
@@ -53,27 +53,33 @@ class AuthTests(TestCase):
         db.create_all()
 
     def test_signup(self):
-        # A test for the signup route:
-        # - Make a POST request to /signup, sending a username & password
-        # - Check that the user now exists in the database
+        """
+        Test that a new user's credentials are added to 
+        the database after signing up for an account.
+        """
+        # Make a POST request to /signup, sending a username & password
         post_data = {
             'username': 'me1',
             'password': 'password'
         }
         self.app.post('/signup', data=post_data)
 
+        # Check that the user now exists in the database
         user = User.query.filter_by(username='me1').one()
-
         password_check = bcrypt.check_password_hash(user.password, 'password')
+
         self.assertEqual(user.username, 'me1')
         self.assertTrue(password_check)
 
 
     def test_signup_existing_user(self):
-        # Write a test for the signup route. It should:
-        # - Create a user
+        """
+        Test that a new user cannot sign up with a username that already 
+        exists for another user in the database.
+        """
+        # Create a user
         create_user()
-        # - Make a POST request to /signup, sending the same username & password
+        # Make a POST request to /signup, sending the same username & password
         post_data = {
             'username': 'me1',
             'password': 'password'
@@ -86,47 +92,62 @@ class AuthTests(TestCase):
         self.assertIn('That username is taken. Please choose a different one.', page_text)
 
     def test_login_correct_password(self):
-        # TODO: Write a test for the login route. It should:
-        # - Create a user
+        """
+        Test that a user can successfully login by checking if the login button
+        is not present after the user signs in correctly.
+        """
+        # Create a user
         create_user()
-        # - Make a POST request to /login, sending the created username & password
+        # Make a POST request to /login, sending the created username & password
         post_data = {
             'username': 'me1',
             'password': 'password'
         }
+        # Convert new page into text
         login_page = self.app.post('/login', data=post_data, follow_redirects=True)
         login_page_text = login_page.get_data(as_text=True)
-        # - Check that the "login" button is not displayed on the homepage
+
+        # Check that the "login" button is not displayed on the homepage
         self.assertNotIn('Log In', login_page_text)
 
     def test_login_nonexistent_user(self):
-        # TODO: Write a test for the login route. It should:
-        # - Make a POST request to /login, sending a username & password
+        """
+        Test that a user cannot login with a username that 
+        does not exist in the database.
+        """
+        # Make a POST request to /login, sending a username & password
         post_data = {
             'username': 'nonexistent_user',
             'password': 'password'
         }
-        # - Check that the login form is displayed again, with an appropriate
-        #   error message
+        # Convert reloaded page with error message into text
         login_page = self.app.post('/login', data=post_data, follow_redirects=True)
         login_page_text = login_page.get_data(as_text=True)
+
+        # Check that the login form is displayed again, with an appropriate
+        #   error message
         self.assertIn('No user with that username. Please try again.', login_page_text)
         
 
     def test_login_incorrect_password(self):
-        # TODO: Write a test for the login route. It should:
-        # - Create a user
+        """
+        Test that a new user's credentials are added to 
+        the database after signing up for an account.
+        """
+        # Create a user
         create_user()
-        # - Make a POST request to /login, sending the created username &
+        # Make a POST request to /login, sending the created username &
         #   an incorrect password
         post_data = {
             'username': 'me1',
             'password': 'wrong_password'
         }
-        # - Check that the login form is displayed again, with an appropriate
-        #   error message
+        # Convert reloaded page with error message into text
         login_page = self.app.post('/login', data=post_data, follow_redirects=True)
         login_page_text = login_page.get_data(as_text=True)
+
+        # Check that the login form is displayed again, with an appropriate
+        #   error message
         self.assertIn("Password doesn&#39;t match. Please try again.", login_page_text)
 
     def test_logout(self):

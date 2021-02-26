@@ -234,6 +234,7 @@ class MainTests(unittest.TestCase):
         self.assertEqual(created_author.biography, 'Arthur C. Clarke was an English science-fiction writer.')
 
     def test_create_genre(self):
+        """Test creating a genre."""
         # Set up
         create_books()
         create_user()
@@ -250,6 +251,7 @@ class MainTests(unittest.TestCase):
         self.assertIsNotNone(created_genre)
 
     def test_profile_page(self):
+        """Test that the profile page displays accurate user information."""
         # Set up
         # create_books()
         create_user()
@@ -264,6 +266,10 @@ class MainTests(unittest.TestCase):
     
 
     def test_favorite_book(self):
+        """
+        Test that the favorite button adds the book to 
+        the user's favorites.
+        """
         # Login as the user me1
         # Set up
         create_books()
@@ -280,14 +286,14 @@ class MainTests(unittest.TestCase):
         
 
     def test_unfavorite_book(self):
+        """
+        Test that the unfavorite button removes the book from 
+        the user's favorites.
+        """
         # Login as the user me1, and add book with id 1 to me1's favorites
         create_books()
         create_user()
         login(self.app, 'me1', 'password')
-
-        # user = User.query.filter_by(username='me1').one()
-        # book = Book.query.get(1)
-        # user.favorite_books.append(book)
 
         # Make a POST request to the /favorite/1 route
         self.app.post('/favorite/1', follow_redirects=True)
@@ -302,6 +308,3 @@ class MainTests(unittest.TestCase):
         # favorites
         self.assertNotIn(book, user.favorite_books)
 
-
-
-# Ask about create authors in To-Dos, follow_redirects parameter, profile test with name 1, and unfavorite book test
