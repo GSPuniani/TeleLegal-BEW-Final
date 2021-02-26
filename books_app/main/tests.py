@@ -67,7 +67,7 @@ class MainTests(unittest.TestCase):
         create_user()
 
         # Make a GET request
-        response = self.app.get('/', follow_redirects=True)
+        response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
 
         # Check that page contains all of the things we expect
@@ -92,7 +92,7 @@ class MainTests(unittest.TestCase):
         login(self.app, 'me1', 'password')
 
         # Make a GET request
-        response = self.app.get('/', follow_redirects=True)
+        response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
 
         # Check that page contains all of the things we expect
@@ -117,7 +117,7 @@ class MainTests(unittest.TestCase):
 
         # Make a GET request to the URL /book/1, check to see that the
         # status code is 200
-        response = self.app.get('/book/1', follow_redirects=True)
+        response = self.app.get('/book/1')
         self.assertEqual(response.status_code, 200)
 
         # Check that the response contains the book's title, publish date,
@@ -168,7 +168,7 @@ class MainTests(unittest.TestCase):
             'audience': 'CHILDREN',
             'genres': []
         }
-        self.app.post('/book/1', data=post_data)
+        self.app.post('/book/1', data=post_data, follow_redirects=True)
         
         # Make sure the book was updated as we'd expect
         book = Book.query.get(1)
@@ -191,7 +191,7 @@ class MainTests(unittest.TestCase):
             'audience': 'ADULT',
             'genres': []
         }
-        self.app.post('/create_book', data=post_data)
+        self.app.post('/create_book', data=post_data, follow_redirects=True)
 
         # Make sure book was updated as we'd expect
         created_book = Book.query.filter_by(title='Go Set a Watchman').one()
@@ -226,7 +226,7 @@ class MainTests(unittest.TestCase):
             'name': 'Arthur C. Clarke',
             'biography': 'Arthur C. Clarke was an English science-fiction writer.'
         }
-        self.app.post('/create_author', data=post_data)
+        self.app.post('/create_author', data=post_data, follow_redirects=True)
 
         # Verify that the author was updated in the database
         created_author = Author.query.filter_by(name='Arthur C. Clarke').one()
@@ -243,7 +243,7 @@ class MainTests(unittest.TestCase):
         post_data = {
             'name': 'Science-fiction',
         }
-        self.app.post('/create_genre', data=post_data)
+        self.app.post('/create_genre', data=post_data, follow_redirects=True)
 
         # Verify that the genre was updated in the database
         created_genre = Genre.query.filter_by(name='Science-fiction').one()
@@ -252,15 +252,15 @@ class MainTests(unittest.TestCase):
     def test_profile_page(self):
         # Set up
         # create_books()
-        # create_user()
+        create_user()
 
-        # TODO: Make a GET request to the /profile/1 route
-        response = self.app.get('/profile/aaa', follow_redirects=True)
+        # Make a GET request to the /profile/me1 route
+        response = self.app.get('/profile/me1')
         self.assertEqual(response.status_code, 200)
 
-        # TODO: Verify that the response shows the appropriate user info
+        # Verify that the response shows the appropriate user info
         response_text = response.get_data(as_text=True)
-        self.assertIn('aaa', response_text)
+        self.assertIn('me1', response_text)
     
 
     def test_favorite_book(self):
@@ -271,7 +271,7 @@ class MainTests(unittest.TestCase):
         login(self.app, 'me1', 'password')
 
         # Make a POST request to the /favorite/1 route
-        self.app.post('/favorite/1')
+        self.app.post('/favorite/1', follow_redirects=True)
 
         # Verify that the book with id 1 was added to the user's favorites
         book = Book.query.get(1)
@@ -290,10 +290,10 @@ class MainTests(unittest.TestCase):
         # user.favorite_books.append(book)
 
         # Make a POST request to the /favorite/1 route
-        self.app.post('/favorite/1')
+        self.app.post('/favorite/1', follow_redirects=True)
 
         # Make a POST request to the /unfavorite/1 route
-        self.app.post('/unfavorite/1')
+        self.app.post('/unfavorite/1', follow_redirects=True)
 
         book = Book.query.get(1)
         user = User.query.filter_by(username='me1').one()
