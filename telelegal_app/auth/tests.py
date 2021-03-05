@@ -3,12 +3,12 @@ from unittest import TestCase
 
 from datetime import date
  
-from books_app import app, db, bcrypt
-from books_app.models import Book, Author, User, Audience
+from telelegal_app import app, db, bcrypt
+from telelegal_app.models import User, Forum, Requests
 
 """
 Run these tests with the command:
-python -m unittest books_app.auth.tests
+python -m unittest telelegal_app.auth.tests
 """
 
 #################################################
