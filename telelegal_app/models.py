@@ -16,6 +16,7 @@ class FormEnum(enum.Enum):
 
 
 class Attorney(UserMixin, db.Model):
+    """User model, for attorneys only)."""
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False, unique=True)
     password = db.Column(db.String(200), nullable=False)
@@ -29,7 +30,7 @@ class Attorney(UserMixin, db.Model):
 class Forum(db.Model):
     """Forum model."""
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), nullable=False)
+    title = db.Column(db.String(150), nullable=False)
     post = db.Column(db.String(1000), nullable=False)
     publish_date = db.Column(db.Date)
 
@@ -46,11 +47,12 @@ class Forum(db.Model):
 
 
 class Requests(db.Model):
+    """Requests model."""
     id = db.Column(db.Integer, primary_key=True)
-    message = db.Column(db.String(500), nullable=False)
-
-    attorney_id = db.Column(db.Integer, db.ForeignKey('attorney.id'), nullable=False)
-    attorney = db.relationship('Attorney', back_populates='messages')
+    full_name = db.Column(db.String(80), nullable=False)
+    city = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(80), nullable=False)
 
 
 
