@@ -1,15 +1,30 @@
 """Import packages and modules."""
 from flask import Blueprint, request, render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required, current_user
+from flask_login import login_user, logout_user, current_user
 from datetime import date, datetime
-from books_app.models import Book, Author, Genre, User
-from books_app.main.forms import BookForm, AuthorForm, GenreForm
-from books_app import bcrypt
+from telelegal_app.models import Book, Author, Genre, User
+from telelegal_app.main.forms import BookForm, AuthorForm, GenreForm
+from telelegal_app import bcrypt
+from functools import wraps
 
 # Import app and db from events_app package so that we can run app
 from books_app import app, db
 
 main = Blueprint("main", __name__)
+
+def login_required(role="ANY"):
+    def wrapper(fn):
+        @wraps(fn)
+        def decorated_view(*args, **kwargs):
+
+            if not current_user.is_authenticated():
+               return current_app.login_manager.unauthorized()
+            urole = current_app.login_manager.reload_user().get_urole()
+            if ( (urole != role) and (role != "ANY")):
+                return current_app.login_manager.unauthorized()      
+            return fn(*args, **kwargs)
+        return decorated_view
+    return wrapper
 
 ##########################################
 #           Routes                       #
