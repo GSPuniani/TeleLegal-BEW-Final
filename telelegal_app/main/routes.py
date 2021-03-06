@@ -111,3 +111,16 @@ def profile(full_name):
     profile = Profile.query.filter_by(full_name=full_name).first()
     return render_template('profile.html', profile=profile)
 
+@main.route('/directory')
+def directory():
+    all_profiles = Profile.query.all()
+    return render_template('directory.html',
+        all_profiles=all_profiles)
+
+@main.route('/forum')
+@login_required
+def forum():
+    all_forum_posts = Forum.query.all()
+    return render_template('forum.html',
+        all_forum_posts=all_forum_posts)
+

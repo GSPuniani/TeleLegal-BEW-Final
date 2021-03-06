@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Attorney Directory</h2>
+
+<ul>
+{% for profile in all_profiles %}
+    <li><a href="/profile/{{ profile.id }}">{{ profile.full_name }}</a></li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}
