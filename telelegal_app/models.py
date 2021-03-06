@@ -31,7 +31,7 @@ class User(UserMixin, db.Model):
 class Profile(db.Model):
     """Attorney profile model."""
     id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(80), nullable=False)
+    full_name = db.Column(db.String(80), nullable=False, unique=True)
     law_firm = db.Column(db.String(80), nullable=True)
     state_bar_num = db.Column(db.Integer, nullable=False)
     practice_areas = db.Column(db.String(300), nullable=False)

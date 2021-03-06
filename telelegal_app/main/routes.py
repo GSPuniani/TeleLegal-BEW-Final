@@ -70,7 +70,9 @@ def create_request():
     if form.validate_on_submit():
         new_request = Requests(
             full_name=form.full_name.data,
-
+            city=form.city.data,
+            email=form.email.data,
+            description=form.description.data
         )
         db.session.add(new_request)
         db.session.commit()
@@ -83,56 +85,29 @@ def create_request():
 
 
 @main.route('/forum/<forum_id>', methods=['GET', 'POST'])
-def book_detail(book_id):
-    book = Book.query.get(book_id)
-    form = BookForm(obj=book)
+@login_required
+def forum_post(forum_id):
+    forum_post = Forum.query.get(forum_id)
+    form = ForumForm(obj=forum_post)
     
     # if form was submitted and contained no errors
     if form.validate_on_submit():
-        book.title = form.title.data
-        book.publish_date = form.publish_date.data
-        book.author = form.author.data
-        book.audience = form.audience.data
-        book.genres = form.genres.data
+        forum_post.title = form.title.data
+        forum_post.publish_date = form.publish_date.data
+        forum_post.author = form.author.data
+        forum_post.post = form.post.data
 
         db.session.commit()
 
-        flash('Book was updated successfully.')
-        return redirect(url_for('main.book_detail', book_id=book_id))
+        flash('Forum post was updated successfully.')
+        return redirect(url_for('main.forum_post', forum_id=forum_id))
 
-    return render_template('book_detail.html', book=book, form=form)
+    return render_template('forum_post.html', forum_post=forum_post, form=form)
 
 
-@main.route('/profile/<username>')
-def profile(username):
+@main.route('/profile/<full_name>')
+def profile(full_name):
     # user = User.query.filter_by(username=username).one()
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(full_name=full_name).first()
     return render_template('profile.html', user=user)
 
-
-@main.route('/favorite/<book_id>', methods=['POST'])
-@login_required
-def favorite_book(book_id):
-    book = Book.query.get(book_id)
-    if book in current_user.favorite_books:
-        flash('Book already in favorites.')
-    else:
-        current_user.favorite_books.append(book)
-        db.session.add(current_user)
-        db.session.commit()
-        flash('Book added to favorites.')
-    return redirect(url_for('main.book_detail', book_id=book_id))
-
-
-@main.route('/unfavorite/<book_id>', methods=['POST'])
-@login_required
-def unfavorite_book(book_id):
-    book = Book.query.get(book_id)
-    if book not in current_user.favorite_books:
-        flash('Book not in favorites.')
-    else:
-        current_user.favorite_books.remove(book)
-        db.session.add(current_user)
-        db.session.commit()
-        flash('Book removed from favorites.')
-    return redirect(url_for('main.book_detail', book_id=book_id))
