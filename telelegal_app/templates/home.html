@@ -2,26 +2,79 @@
 
 {% block content %}
 
-<h2>Books</h2>
+<!-- HERO -->
+<div class="jumbotron text-center hero-background-img">
+    <h1>TeleLegal</h1>
+    <p class="lead">Bridging access to attorneys remotely</p>
+    <a href="#learn-more" class="btn btn-primary">Learn More</a>
+</div>
 
-<ul>
-{% for book in all_books %}
-    <li><a href="/book/{{ book.id }}">{{ book.title }}</a> by {{ book.author.name }}</li>
-{% endfor %}
-</ul>
+<!-- PURPOSE
+<div class="row">
+    <div class="col-lg-8 offset-lg-2">
+        <p>
+            TeleLegal remotely and securely connects Attorneys to Potential Clients across the State of California. Attorneys utilizing TeleLegal’s services gain access to a pool of California citizens with specific and often urgent legal questions. Either the Attorney or a Potential Client can initiate a text chat with the other as part of the initial consultation. The Attorney and Potential Client can then agree to enter a video chat to further discuss the case particulars and complete the consultation. During or after this video call, the Attorney and Potential Client--if they decide to proceed forward with the matter--may exchange additional contact information and negotiate between themselves a reasonable fee agreement. Many “routine” services, such as drafting a simple will or reviewing a standard contract, may be offered at a flat rate. Attorneys who sign up will also have access to the TeleLegal Community, a forum for lawyers to share useful practice tips with each other.
+        </p>
+    </div>
+</div> -->
 
-<h2>Users</h2>
+<!-- BENEFITS -->
+<section id="learn-more">
+<div class="col-md-4 offset-lg-4">
+    <h2>For Potential Clients</h2>
+</div>
+<div class="container pb-5 pt-5">
+    <div class="row">
+        <div class="col-lg-4">
+            <h3>Simple</h3>
+            <p class="lead">
+                If you (<q>Potential Client</q>) are seeking legal help or advice, simply fill out the Request Form <a href="./request-form.html" data-toggle="tooltip" title="Request Form">here</a>. A qualified attorney will reach out to you at the email address that you provide in the form. If you and the attorney agree to work on the case together, then the attorney will set up video consultation sessions to work on your case with you.
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h3>Convenient</h3>
+            <p class="lead">
+                Potential Clients have access to attorneys across the entire State of California. All communication will be over text or video, so there is no need to physically meet at any legal office. Attorneys are generally quick to answer requests. 
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h3>Affordable</h3>
+            <p class="lead">
+                Potential Clients do not pay anything up front. The emails or text chat messages exchanged with the attorney after submitting the Request Form are free of charge. The Potential Client and the attorney will make their own arrangements for reasonable prices during any video consultations. Many <q>routine</q> services, such as drafting a simple will or reviewing a standard contract, may be offered at a flat rate.
+            </p>
+        </div>
 
-<p>
-    <a href="/create_user">+ New User</a>
-</p>
+        <!-- Left Image with Right Text -->
+        <div class="row m-5">
+            <div class="col-lg-6">
+                <img src="attorney-benefits.jpg" class="img-fluid rounded">
+            </div>
+            <div class="col-lg-6">
+                <h3>Benefits to Attorneys</h3>
+                <p class="lead">
+                    With TeleLegal, attorneys of all experience levels have access to Potential Clients all over California. This is especially useful for newly instated attorneys who do not yet have an expansive network from which to establish their practice. However, more seasoned attorneys can also take advantage of TeleLegal's service to earn extra income by completing small cases or services on the side, branching out of their primary practice areas, or reaching clients who otherwise struggle with finding legal help.
+                </p>
 
-<ul>
-    {% for user in all_users %}
-        <li><a href="/profile/{{ user.username }}">{{ user.username }}</a></li>
-    {% endfor %}
-</ul>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
 
+<!-- CTA -->
+<div class="col-lg-5 offset-lg-4">
+    <h2 style="margin-top: 1.7em; margin-bottom: 1.6em;">Start using TeleLegal today!</h2>
+</div>
+<div class="col-lg-10 offset-lg-2">
+    <p class="lead"> 
+        If you are seeking legal help, then simply fill out the Request Form <a href="./request-form.html" data-toggle="tooltip" title="Request Form">here</a>.
+    </p>
+</div>
+<div class="col-lg-8 offset-lg-2">
+    <p class="lead">
+        If you are an attorney who wants to offer legal help, then create an account <a href="#" data-toggle="tooltip" title="Sign Up Page">here</a> and select a payment plan <a href="#" data-toggle="tooltip" title="Payment Plan">here</a>.
+    </p>
+</div>
 
 
 {% endblock %}
