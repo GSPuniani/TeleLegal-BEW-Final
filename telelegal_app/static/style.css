@@ -1,52 +1,65 @@
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #eee;
-    font-family: 'Open Sans', sans-serif;
-}
-
-#content {
-    width: 70%;
-    background-color: white;
-    padding: 20px;
-}
-
-nav {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-nav a {
-    color: navy;
-    text-decoration: none;
-    border: 1px solid black;
-    padding: 1px 5px;
-    font-size: 1.2em;
-}
-
-fieldset {
-    display: flex;
-    flex-direction: column;
-    margin: 20px 0;
-    padding: 20px;
-}
-
-fieldset * {
-    margin: 5px;
-}
-
-fieldset input {
-    padding: 5px;
-}
-
-input[type=submit] {
-    padding: 10px 20px;
-    align-self: flex-end;
-}
-
-li.error {
+/* body {
     color: red;
+} */
+
+/* Customize the navigation bar */
+.navbar {
+    padding: 1rem;
+    background-color: rgb(8, 51, 117);
+    /* green - background-color: rgba(18, 68, 6, 0.767); */
+    font-size: 1.5em;
+}
+.navbar-brand {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Separate the sign in and sign up buttons */
+.nav-item {
+    margin: 0 0.5em 0 0.5em;
+}
+
+/* Make the body text lighter than gray for readability */
+p {
+    color: antiquewhite;
+    margin-bottom: 3em;
+}
+
+a {
+    color: rgb(86, 143, 230);
+}
+
+/* Customize the footer */
+footer {
+    padding: 0.1rem;
+    background-color: rgb(8, 51, 117);
+}
+
+/* Customize the button */
+.btn-primary:hover {
+    background-color: blue;
+    color: white;
+  }
+
+/* Add a picture for the jumbotron */
+.hero-background-img {
+    position: relative;
+    background: rgba(0, 0, 0, 0.3); /* If our image is bright, we can tone it down with this darker overlay */
+    padding-top: 250px;
+    padding-bottom: 250px;
+}
+
+.hero-background-img:after {
+    content: "";
+    position: absolute;
+    background-image: url("background-img.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.3; 
 }
