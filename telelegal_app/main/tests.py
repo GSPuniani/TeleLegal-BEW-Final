@@ -24,7 +24,7 @@ def login(client, username, password):
 def logout(client):
     return client.get('/logout', follow_redirects=True)
 
-def create_books():
+def create_forum_post():
     a1 = Author(name='Harper Lee')
     b1 = Book(
         title='To Kill a Mockingbird',

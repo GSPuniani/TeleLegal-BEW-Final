@@ -13,6 +13,7 @@ class User(UserMixin, db.Model):
     forum_posts = db.relationship('Forum', back_populates='author')
     # One-to-one relationship: each user has exactly one profile
     profile = db.relationship('Profile', back_populates='user')
+    profile_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
         return f'<Attorney: {self.username}>'
@@ -27,6 +28,7 @@ class Profile(db.Model):
     years_exp = db.Column(db.Integer, nullable=False)
     # One-to-one relationship: each user has exactly one profile
     user = db.relationship('User', back_populates='profile')
+    user_id = db.Column(db.Integer, db.ForeignKey('profile.id'), nullable=False)
 
 
 
