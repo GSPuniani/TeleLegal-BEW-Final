@@ -2,10 +2,16 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, DateField, SelectField, SubmitField, TextAreaField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import DataRequired, Length, ValidationError
-from books_app.models import Audience, Book, Author, Genre, User
+from telelegal_app.models import User, Forum, Requests
 
-class BookForm(FlaskForm):
-    """Form to create a book."""
+class ProfileForm(FlaskForm):
+    """Form to create a public profile."""
+    name = StringField('Genre Name',
+        validators=[DataRequired(), Length(min=3, max=80)])
+    submit = SubmitField('Submit')
+
+class ForumForm(FlaskForm):
+    """Form to create a forum post."""
     title = StringField('Book Title',
         validators=[DataRequired(), Length(min=3, max=80)])
     publish_date = DateField('Date Published')
@@ -17,16 +23,9 @@ class BookForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-class AuthorForm(FlaskForm):
-    """Form to create an author."""
-    name = StringField('Author Name',
+class RequestForm(FlaskForm):
+    """Form to create a request for a case review."""
+    full_name = StringField('Name of Potential Client',
         validators=[DataRequired(), Length(min=3, max=80)])
-    biography = TextAreaField('Author Biography')
-    submit = SubmitField('Submit')
-
-
-class GenreForm(FlaskForm):
-    """Form to create a genre."""
-    name = StringField('Genre Name',
-        validators=[DataRequired(), Length(min=3, max=80)])
+    description = TextAreaField('Author Biography')
     submit = SubmitField('Submit')

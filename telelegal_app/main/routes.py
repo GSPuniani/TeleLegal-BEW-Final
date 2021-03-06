@@ -19,13 +19,10 @@ main = Blueprint("main", __name__)
 
 @main.route('/')
 def homepage():
-    all_books = Book.query.all()
-    all_users = User.query.all()
-    return render_template('home.html',
-        all_books=all_books, all_users=all_users)
+    return render_template('home.html')
 
 
-@main.route('/create_book', methods=['GET', 'POST'])
+@main.route('/create_profile', methods=['GET', 'POST'])
 @login_required
 def create_book():
     form = BookForm()
@@ -47,7 +44,7 @@ def create_book():
     return render_template('create_book.html', form=form)
 
 
-@main.route('/create_author', methods=['GET', 'POST'])
+@main.route('/create_forum_post', methods=['GET', 'POST'])
 @login_required
 def create_author():
     form = AuthorForm()
