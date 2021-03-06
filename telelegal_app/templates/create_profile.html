@@ -4,23 +4,47 @@
 
 <p>Author creation form.</p>
 
-<form method="POST" action="{{ url_for('main.create_author') }}">
+<form method="POST" action="{{ url_for('main.create_profile') }}">
     {{ form.csrf_token }}
     <fieldset>
-        <legend>Enter an author</legend>
+        <legend>Create a public profile</legend>
 
-        {{ form.name.label }}
-        {{ form.name }}
+        {{ form.full_name.label }}
+        {{ form.full_name }}
         <ul>
-        {% for error in form.name.errors %}
+        {% for error in form.full_name.errors %}
             <li class="error">{{ error }}</li>
         {% endfor %}
         </ul>
 
-        {{ form.biography.label }}
-        {{ form.biography }}
+        {{ form.law_firm.label }}
+        {{ form.law_firm }}
         <ul>
-        {% for error in form.biography.errors %}
+        {% for error in form.law_firm.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.state_bar_num.label }}
+        {{ form.state_bar_num }}
+        <ul>
+        {% for error in form.state_bar_num.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.practice_areas.label }}
+        {{ form.practice_areas }}
+        <ul>
+        {% for error in form.practice_areas.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.years_exp.label }}
+        {{ form.years_exp }}
+        <ul>
+        {% for error in form.years_exp.errors %}
             <li class="error">{{ error }}</li>
         {% endfor %}
         </ul>

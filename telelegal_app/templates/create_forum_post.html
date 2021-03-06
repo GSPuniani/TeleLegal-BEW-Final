@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<form method="POST" action="{{ url_for('main.create_book') }}">
+<form method="POST" action="{{ url_for('main.create_forum_post') }}">
     {{ form.csrf_token }}
     <fieldset>
-        <legend>Enter a book</legend>
+        <legend>Create a new forum post</legend>
 
         {{ form.title.label }}
         {{ form.title }}
@@ -15,38 +15,15 @@
         {% endfor %}
         </ul>
         
-        {{ form.publish_date.label }}
-        {{ form.publish_date(placeholder="YYYY-mm-dd") }}
-        <ul>
-        {% for error in form.title.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
         
-        {{ form.author.label }}
-        {{ form.author }}
+        {{ form.post.label }}
+        {{ form.post }}
         <ul>
-        {% for error in form.author.errors %}
+        {% for error in form.post.errors %}
             <li class="error">{{ error }}</li>
         {% endfor %}
         </ul>
-        
-        {{ form.audience.label }}
-        {{ form.audience }}
-        <ul>
-        {% for error in form.audience.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
-        
-        {{ form.genres.label }}
-        {{ form.genres }}
-        <ul>
-        {% for error in form.genres.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
-            
+
         {{ form.submit }}
     </fieldset>
 </form>

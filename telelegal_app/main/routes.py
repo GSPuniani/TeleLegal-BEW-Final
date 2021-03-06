@@ -40,7 +40,7 @@ def create_profile():
 
         flash('New profile was created successfully.')
         return redirect(url_for('main.book_detail', book_id=new_profile.id))
-    return render_template('create_book.html', form=form)
+    return render_template('create_profile.html', form=form)
 
 
 @main.route('/create_forum_post', methods=['GET', 'POST'])
@@ -51,8 +51,8 @@ def create_forum_post():
         new_post = Forum(
             title=form.title.data,
             post=form.post.data,
-            publish_date=form.publish_date.data,
-            author=form.author.data
+            publish_date=datetime.today,
+            author=current_user.username
         )
         db.session.add(new_post)
         db.session.commit()
@@ -61,7 +61,7 @@ def create_forum_post():
         return redirect(url_for('main.homepage'))
     
     # if form was not valid, or was not submitted yet
-    return render_template('create_author.html', form=form)
+    return render_template('create_forum_post.html', form=form)
 
 
 @main.route('/create_request', methods=['GET', 'POST'])
@@ -81,7 +81,7 @@ def create_request():
         return redirect(url_for('main.homepage'))
     
     # if form was not valid, or was not submitted yet
-    return render_template('create_genre.html', form=form)
+    return render_template('create_request.html', form=form)
 
 
 @main.route('/forum/<forum_id>', methods=['GET', 'POST'])
