@@ -52,7 +52,7 @@ footer {
 .hero-background-img:after {
     content: "";
     position: absolute;
-    background-image: url("background-img.jpg");
+    background-image: url("assets/background-img.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

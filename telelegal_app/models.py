@@ -2,17 +2,6 @@
 from telelegal_app import db
 from sqlalchemy.orm import backref
 from flask_login import UserMixin
-import enum
-
-class FormEnum(enum.Enum):
-    """Helper class to make it easier to use enums with forms."""
-    @classmethod
-    def choices(cls):
-        return [(choice.name, choice) for choice in cls]
-
-    def __str__(self):
-        return str(self.value)
-
 
 
 class User(UserMixin, db.Model):
@@ -49,8 +38,8 @@ class Forum(db.Model):
     publish_date = db.Column(db.Date)
 
     # One-to-many relationship: each user can have many forum posts
-    author_id = db.Column(db.Integer, db.ForeignKey('author.id'), nullable=False)
-    author = db.relationship('Attorney', back_populates='forum_posts')
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    author = db.relationship('User', back_populates='forum_posts')
 
     def __str__(self):
         return f'<Forum Post: {self.title}>'
