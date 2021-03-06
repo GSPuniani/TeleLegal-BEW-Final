@@ -31,7 +31,7 @@ class RequestForm(FlaskForm):
     full_name = StringField('Full Name',
         validators=[DataRequired()])
     city = StringField('City of Residence')
-    email = StringField('Email Address (at which a qualified attorney can contact you)',
+    email = StringField('Email Address',
         validators=[DataRequired(), Length(min=6)])
     description = TextAreaField('Description of Case or Issue (include location and date, if applicable)',
         validators=[DataRequired(), Length(min=10)])

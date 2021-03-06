@@ -3,19 +3,28 @@
 {% block content %}
 
 <p>
-Welcome to {{ user.username }}'s profile.
+    Welcome to {{ profile.full_name }}'s profile!
 </p>
 
-<!-- TODO: Display the user's actual favorites here -->
 
 <p>
-    {{ user.username }}'s favorite books are:
+    Attorney: {{ profile.full_name }}
+</p>
 
-    <ul>
-        {% for book in user.favorite_books %}
-        <li><a href="/book/{{ book.id }}">{{ book.title }}</a></li>
-        {% endfor %}
-    </ul>
+<p>
+    Law Firm: {{ profile.law_firm }}
+</p>
+
+<p>
+    State Bar Number: {{ profile.state_bar_num }}
+</p>
+
+<p>
+    Practice Areas: {{ profile.practice_areas }}
+</p>
+
+<p>
+    Years of Experience: {{ profile.years_exp }}
 </p>
 
 {% endblock %}

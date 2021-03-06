@@ -108,6 +108,6 @@ def forum_post(forum_id):
 @main.route('/profile/<full_name>')
 def profile(full_name):
     # user = User.query.filter_by(username=username).one()
-    user = User.query.filter_by(full_name=full_name).first()
-    return render_template('profile.html', user=user)
+    profile = Profile.query.filter_by(full_name=full_name).first()
+    return render_template('profile.html', profile=profile)
 

@@ -2,21 +2,45 @@
 
 {% block content %}
 
-<p>Genre creation form.</p>
+<p>Fill out this form, and a qualified attorney will email you at the provided address.</p>
 
-<form method="POST" action="{{ url_for('main.create_genre') }}">
+<form method="POST" action="{{ url_for('main.create_request') }}">
     {{ form.csrf_token }}
     <fieldset>
         <legend>Enter a genre</legend>
 
-        {{ form.name.label }}
-        {{ form.name }}
+        {{ form.full_name.label }}
+        {{ form.full_name }}
         <ul>
-        {% for error in form.name.errors %}
+        {% for error in form.full_name.errors %}
             <li class="error">{{ error }}</li>
         {% endfor %}
         </ul>
-        
+
+        {{ form.city.label }}
+        {{ form.city }}
+        <ul>
+        {% for error in form.city.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.email.label }}
+        {{ form.email }}
+        <ul>
+        {% for error in form.email.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.description.label }}
+        {{ form.description }}
+        <ul>
+        {% for error in form.description.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
         {{ form.submit }}
     </fieldset>
 </form>
