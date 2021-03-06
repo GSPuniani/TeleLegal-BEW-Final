@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Requests</h2>
+
+<ul>
+{% for request in all_requests %}
+    <li><a href="/requests/{{ request.id }}">{{ request.description }}</a></li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

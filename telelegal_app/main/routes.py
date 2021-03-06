@@ -124,3 +124,10 @@ def forum():
     return render_template('forum.html',
         all_forum_posts=all_forum_posts)
 
+@main.route('/requests')
+@login_required
+def requests():
+    all_requests = Requests.query.all()
+    return render_template('requests.html',
+        all_requests=all_requests)
+
