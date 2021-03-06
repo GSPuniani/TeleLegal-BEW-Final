@@ -47,7 +47,7 @@
         <!-- Left Image with Right Text -->
         <div class="row m-5">
             <div class="col-lg-6">
-                <img src="assets/attorney-benefits.jpg" class="img-fluid rounded">
+                <img src="{{ url_for('static', filename='assets/attorney-benefits.jpg') }}" class="img-fluid rounded">
             </div>
             <div class="col-lg-6">
                 <h3>Benefits to Attorneys</h3>
@@ -67,7 +67,7 @@
 </div>
 <div class="col-lg-10 offset-lg-2">
     <p class="lead"> 
-        If you are seeking legal help, then simply fill out the Request Form <a href="/create-request" data-toggle="tooltip" title="Request Form">here</a>.
+        If you are seeking legal help, then simply fill out the Request Form <a href="{{ url_for('main.create_request') }}" data-toggle="tooltip" title="Request Form">here</a>.
     </p>
 </div>
 <div class="col-lg-8 offset-lg-2">

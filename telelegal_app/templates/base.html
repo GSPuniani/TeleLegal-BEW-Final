@@ -28,15 +28,15 @@
                     <!-- bg-primary -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="create-request.html">Request Form</a>
+                            <a class="nav-link" href="{{ url_for('main.create_request') }}">Request Form</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 For Attorneys
                             </a>
                             <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-light" href="/requests">Requests</a>
-                                <a class="dropdown-item text-light" href="forum.html">Forum</a>
+                                <a class="dropdown-item text-light" href="{{ url_for('main.requests') }}">Requests</a>
+                                <a class="dropdown-item text-light" href="{{ url_for('main.forum') }}">Forum</a>
                                 <!-- <div class="dropdown-divider"></div> -->
                                 <a class="dropdown-item text-light" href="#">Payment Plan</a>
                             </div>
@@ -56,7 +56,7 @@
                                 Directory
                             </a>
                             <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-light" href="directory.html">A-Z</a>
+                                <a class="dropdown-item text-light" href="{{ url_for('main.directory') }}">A-Z</a>
                                 <a class="dropdown-item text-light" href="#">City</a>
                                 <a class="dropdown-item text-light" href="#">Practice Area</a>
                             </div>
