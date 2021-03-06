@@ -18,12 +18,14 @@ main = Blueprint("main", __name__)
 
 @main.route('/')
 def homepage():
+    """Homepage."""
     return render_template('home.html')
 
 
 @main.route('/create_profile', methods=['GET', 'POST'])
 @login_required
 def create_profile():
+    """Create a public profile."""
     form = ProfileForm()
 
     # if form was submitted and contained no errors
@@ -46,6 +48,7 @@ def create_profile():
 @main.route('/create_forum_post', methods=['GET', 'POST'])
 @login_required
 def create_forum_post():
+    """Create a forum post (attorneys only)."""
     form = ForumForm()
     if form.validate_on_submit():
         new_post = Forum(
@@ -66,6 +69,7 @@ def create_forum_post():
 
 @main.route('/create_request', methods=['GET', 'POST'])
 def create_request():
+    """Create a request for a case to be reviewed by an attorney."""
     form = RequestForm()
     if form.validate_on_submit():
         new_request = Requests(
@@ -87,6 +91,7 @@ def create_request():
 @main.route('/forum/<forum_id>', methods=['GET', 'POST'])
 @login_required
 def forum_post(forum_id):
+    """Create a forum post."""
     forum_post = Forum.query.get(forum_id)
     form = ForumForm(obj=forum_post)
     
@@ -107,12 +112,14 @@ def forum_post(forum_id):
 
 @main.route('/profile/<full_name>')
 def profile(full_name):
+    """View public profile of an attorny."""
     # user = User.query.filter_by(username=username).one()
     profile = Profile.query.filter_by(full_name=full_name).first()
     return render_template('profile.html', profile=profile)
 
 @main.route('/directory')
 def directory():
+    """Directory page displaying list of all attorney profiles."""
     all_profiles = Profile.query.all()
     return render_template('directory.html',
         all_profiles=all_profiles)
@@ -120,6 +127,7 @@ def directory():
 @main.route('/forum')
 @login_required
 def forum():
+    """View list of forum posts (attorneys only)."""
     all_forum_posts = Forum.query.all()
     return render_template('forum.html',
         all_forum_posts=all_forum_posts)
@@ -127,7 +135,15 @@ def forum():
 @main.route('/requests')
 @login_required
 def requests():
+    """View list of all submitted requests (attorneys only)."""
     all_requests = Requests.query.all()
     return render_template('requests.html',
         all_requests=all_requests)
+
+@main.route('/requests/<requests_id>')
+@login_required
+def view_request(requests_id):
+    """View an individual request within the list (attorneys only)."""
+    request = Requests.query.filter_by(requests_id=requests_id).first()
+    return render_template('request.html', request=request)
 

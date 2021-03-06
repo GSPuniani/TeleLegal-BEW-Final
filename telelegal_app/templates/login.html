@@ -3,7 +3,32 @@
 
 <h1>Log In</h1>
 
-<h3 class="bg-dark text-center pt-3 pb-5 mb-0">Attorneys: Sign in here</h3>
+<form action="/login" method="POST">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Enter your credentials</legend>
+
+        {{ form.username.label }}
+        {{ form.username }}
+        <ul>
+        {% for error in form.username.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.password.label }}
+        {{ form.password }}
+        <ul>
+        {% for error in form.password.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.submit }}
+    </fieldset>
+</form>
+
+<!-- <h3 class="bg-dark text-center pt-3 pb-5 mb-0">Attorneys: Sign in here</h3>
   <form class="bg-dark" style="padding-bottom: 10.3em;">
 	<div class="container">
 		<div class="row">
@@ -45,6 +70,6 @@
             </div>
 		</div>
 	</div>
-  </form>
+  </form> -->
 
 {% endblock %}

@@ -8,25 +8,16 @@ from telelegal_app.models import User, Forum, Requests
 
 """
 Run these tests with the command:
-python -m unittest telelegal_app.auth.tests
+python3 -m unittest telelegal_app.auth.tests
 """
 
 #################################################
 # Setup
 #################################################
 
-def create_books():
-    a1 = Author(name='Harper Lee')
-    b1 = Book(
-        title='To Kill a Mockingbird',
-        publish_date=date(1960, 7, 11),
-        author=a1
-    )
-    db.session.add(b1)
-
-    a2 = Author(name='Sylvia Plath')
-    b2 = Book(title='The Bell Jar', author=a2)
-    db.session.add(b2)
+def create_forum_post():
+    a1 = Forum(title="First post", post="First forum post ever!")
+    db.session.add(a1)
     db.session.commit()
 
 def create_user():
@@ -167,4 +158,4 @@ class AuthTests(TestCase):
         homepage_text = logged_out.get_data(as_text=True)
 
         # Check that the "login" button appears on the homepage
-        self.assertIn('Log In', homepage_text)
+        self.assertIn('Sign in', homepage_text)
