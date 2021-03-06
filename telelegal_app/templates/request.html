@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>
+    Potential Client
+</h2>
+
+<p>
+    Potential Client Name: {{ request.full_name }}
+</p>
+
+<p>
+    City of Residence: {{ request.city }}
+</p>
+
+<p>
+    Email Address: {{ request.email }}
+</p>
+
+<p>
+    Description of Case: {{ request.description }}
+</p>
+
+
+{% endblock %}
