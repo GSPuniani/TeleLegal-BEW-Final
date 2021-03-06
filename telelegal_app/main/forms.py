@@ -9,7 +9,7 @@ class ProfileForm(FlaskForm):
     full_name = StringField('Full Name',
         validators=[DataRequired(), Length(min=3, max=80)])
     law_firm = StringField('Law Firm')
-    state_bar_num = IntegerField('State Bar Number', validators=[DataRequired(), Length(6)])
+    state_bar_num = IntegerField('State Bar Number', validators=[DataRequired()])
     practice_areas = StringField('Practice Areas')
     years_exp = IntegerField('Years of Experience')
     submit = SubmitField('Submit')

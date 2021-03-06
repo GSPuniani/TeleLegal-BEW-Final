@@ -61,7 +61,7 @@ def create_forum_post():
         db.session.commit()
 
         flash('New post created successfully.')
-        return redirect(url_for('main.homepage'))
+        return redirect(url_for('main.forum'))
     
     # if form was not valid, or was not submitted yet
     return render_template('create_forum_post.html', form=form)

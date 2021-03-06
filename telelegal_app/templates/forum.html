@@ -4,6 +4,8 @@
 
 <h2>Forum</h2>
 
+<a href="/create_forum_post">Add Post</a>
+
 <ul>
 {% for forum_post in all_forum_posts %}
     <li><a href="/forum/{{ forum_post.id }}">{{ forum_post.title }}</a></li>
