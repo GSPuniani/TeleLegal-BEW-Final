@@ -3,7 +3,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import date, datetime
 from telelegal_app.models import User, Forum, Requests
-from telelegal_app.main.forms import BookForm, AuthorForm, GenreForm
+from telelegal_app.main.forms import ProfileForm, ForumForm, RequestForm
 from telelegal_app import bcrypt
 from functools import wraps
 
@@ -63,7 +63,7 @@ def create_author():
     return render_template('create_author.html', form=form)
 
 
-@main.route('/create_genre', methods=['GET', 'POST'])
+@main.route('/create_request', methods=['GET', 'POST'])
 @login_required
 def create_genre():
     form = GenreForm()
@@ -81,7 +81,7 @@ def create_genre():
     return render_template('create_genre.html', form=form)
 
 
-@main.route('/book/<book_id>', methods=['GET', 'POST'])
+@main.route('/forum/<forum_id>', methods=['GET', 'POST'])
 def book_detail(book_id):
     book = Book.query.get(book_id)
     form = BookForm(obj=book)
