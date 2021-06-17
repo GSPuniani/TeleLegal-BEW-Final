@@ -140,6 +140,7 @@ def requests():
     return render_template('requests.html',
         all_requests=all_requests)
 
+# Refactored
 @main.route('/requests/<request_id>')
 @login_required
 def view_request(request_id):
