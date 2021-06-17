@@ -57,7 +57,7 @@ class MainTests(unittest.TestCase):
         db.create_all()
  
     def test_homepage_logged_out(self):
-        """Test that the books show up on the homepage."""
+        """Test that the logout button shows up on the homepage."""
         # Set up
         create_user()
 
@@ -87,6 +87,32 @@ class MainTests(unittest.TestCase):
         # (these should be shown only to logged out users)
         self.assertNotIn('Sign in', response_text)
         self.assertNotIn('Sign up', response_text)
+
+    def test_requests_logged_in(self):
+        """Test that the requests page loads when logged in."""
+        # Set up
+        create_user()
+        login(self.app, 'me1', 'password')
+
+        # Make a GET request
+        response = self.app.get('/requests')
+        self.assertEqual(response.status_code, 200)
+
+    def test_requests_logged_out(self):
+        """Test that the login page is displayed when trying to access this page without signing in."""
+        # Set up
+        create_user()
+
+        # Make a GET request
+        response = self.app.get('/login')
+        self.assertEqual(response.status_code, 200)
+
+        # Check that the page contains the right things
+        response_text = response.get_data(as_text=True)
+        self.assertIn('Please log in to access this page.', response_text)
+        self.assertNotIn('Log Out', response_text)
+
+        
 
 
 
