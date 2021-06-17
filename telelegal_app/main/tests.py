@@ -29,6 +29,11 @@ def create_forum_post():
     db.session.add(a1)
     db.session.commit()
 
+def create_request():
+    r1 = Requests(full_name="John Smith", city="Anytown, USA", email="johnsmith@domain.com", description="Here is my case.")
+    db.session.add(r1)
+    db.session.commit()
+
 def create_user():
     password_hash = bcrypt.generate_password_hash('password').decode('utf-8')
     user = User(username='me1', password=password_hash)
