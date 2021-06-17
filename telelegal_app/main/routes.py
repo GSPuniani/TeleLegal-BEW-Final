@@ -140,10 +140,10 @@ def requests():
     return render_template('requests.html',
         all_requests=all_requests)
 
-@main.route('/requests/<requests_id>')
+@main.route('/requests/<request_id>')
 @login_required
-def view_request(requests_id):
+def view_request(request_id):
     """View an individual request within the list (attorneys only)."""
-    request = Requests.query.filter_by(requests_id=requests_id).first()
+    request = Requests.query.filter_by(requests_id=request_id).first()
     return render_template('request.html', request=request)
 
