@@ -2,12 +2,10 @@
 
 {% block content %}
 
-<p>Fill out this form, and a qualified attorney will email you at the provided address.</p>
-
 <form method="POST" action="{{ url_for('main.create_request') }}">
     {{ form.csrf_token }}
     <fieldset>
-        <legend>Enter a genre</legend>
+        <legend>Fill out this form, and a qualified attorney will email you at the provided address.</legend>
 
         {{ form.full_name.label }}
         {{ form.full_name }}
