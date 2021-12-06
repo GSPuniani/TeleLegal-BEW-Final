@@ -145,6 +145,9 @@ def requests():
 @login_required
 def view_request(request_id):
     """View an individual request within the list (attorneys only)."""
+    print("This is the request id", request_id)
+    print("This is Requests.query", Requests.query)
     request = Requests.query.filter_by(requests_id=request_id).first()
+    print("This is the request", request)
     return render_template('request.html', request=request)
 
