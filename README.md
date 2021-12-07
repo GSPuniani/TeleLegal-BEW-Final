@@ -1,6 +1,34 @@
 # TeleLegal
 
-<i>Make School BEW 1.2: TeleLegal</i>
+<i>Make School BEW 1.2/2.2: TeleLegal</i>
+
+
+## Docker Command Reference
+
+
+### Build the container
+
+```bash
+docker run -p 5000:5000 --rm --name telelegal-container telelegal
+```
+
+### Remove all images with names that contain `flask`
+
+```bash
+docker images -a | grep "flask" | awk '{print $3}' | xargs docker rmi
+```
+
+### Remove all containers with names that contain `flask`
+
+```bash
+docker ps -a | grep "flask" | awk '{print $3}' | xargs docker rmi
+```
+
+### See what's running
+
+```bash
+docker ps --format '{{.Names}}'
+```
 
 ## Setup
 
