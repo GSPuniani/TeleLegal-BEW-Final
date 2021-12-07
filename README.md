@@ -30,27 +30,6 @@ docker ps -a | grep "flask" | awk '{print $3}' | xargs docker rmi
 docker ps --format '{{.Names}}'
 ```
 
-## Setup
-
-Clone this repository to your computer. 
-
-**To run the code**, navigate to the project folder and run the following to install the required packages:
-
-```
-pip3 install -r requirements.txt
-```
-
-Then, copy the `.env.example` file to `.env`:
-
-```
-cp .env.example .env
-```
-
-Then you can run the following to run the Flask server:
-
-```
-python3 app.py
-```
 
 ## Running the Tests
 
