@@ -12,6 +12,7 @@ Jinja2==3.0.3
 MarkupSafe==2.0.1
 pycparser==2.21
 python-dotenv==0.19.2
+psycopg2-binary==2.8.3
 six==1.16.0
 SQLAlchemy==1.4.27
 SQLAlchemy-Utils==0.37.9
