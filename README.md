@@ -2,6 +2,15 @@
 
 <i>Make School BEW 1.2/2.2: TeleLegal</i>
 
+<p align="center">
+    <!-- image size  -->
+    <img src="https://img.shields.io/docker/image-size/GSPuniani/TeleLegal-BEW-Final/?sort=date" />
+    <!-- build status -->
+    <img src="https://img.shields.io/github/issues/GSPuniani/eek-anderson-media" />
+    <!-- website monitoring -->
+    <img src="https://img.shields.io/github/issues-pr/GSPuniani/eek-anderson-media" />
+</p>
+
 
 ## Docker Command Reference
 
