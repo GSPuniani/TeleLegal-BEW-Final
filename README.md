@@ -12,6 +12,10 @@
 </p>
 
 
+## Deployment
+<p>CapRover deployment link: https://telelegal.dev.gobindpuniani.me</p>
+
+
 ## Docker Command Reference
 
 
