@@ -4,11 +4,11 @@
 
 <p align="center">
     <!-- image size  -->
-    <img src="https://img.shields.io/docker/image-size/GSPuniani/TeleLegal-BEW-Final/?sort=date" />
+    <img src="https://img.shields.io/docker/image-size/gobind1/telelegal/first-tag" />
     <!-- build status -->
-    <img src="https://img.shields.io/github/issues/GSPuniani/eek-anderson-media" />
+    <img src="https://img.shields.io/docker/cloud/build/gobind1/telelegal" />
     <!-- website monitoring -->
-    <img src="https://img.shields.io/github/issues-pr/GSPuniani/eek-anderson-media" />
+    <a href="https://statuspage.freshping.io/58884-TeleLegalStatus">Uptime Status</a>
 </p>
 
 
@@ -21,17 +21,6 @@
 docker run -p 5000:5000 --rm --name telelegal-container telelegal
 ```
 
-### Remove all images with names that contain `flask`
-
-```bash
-docker images -a | grep "flask" | awk '{print $3}' | xargs docker rmi
-```
-
-### Remove all containers with names that contain `flask`
-
-```bash
-docker ps -a | grep "flask" | awk '{print $3}' | xargs docker rmi
-```
 
 ### See what's running
 
